@@ -1,23 +1,51 @@
-{% extends 'base.html' %}
+{% extends 'base.html' %} {% block content %}
+<div class="container mt-4">
+  <div class="row">
+    <div class="col-md-10">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="">Expenses</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">
+            My Expenses
+          </li>
+        </ol>
+      </nav>
+    </div>
 
+    <div class="col-md-2">
+      <a href="{% url 'add-expenses'%}" class="btn btn-primary">Add Expense</a>
+    </div>
+  </div>
 
-{% block content %}
-<h1>Expenses List</h2>
+  <div class="container">
+    {% include 'partials/_messages.html' %} {% if expenses.count %}
 
-<ul class="list-group">
-<li class="list-group-item">Bought Beer</li>
-<li class="list-group-item">Bought Beer</li>
-<li class="list-group-item">Bought Beer</li>
-<li class="list-group-item">Bought Beer</li>
-<li class="list-group-item">Bought Beer</li>
-<li class="list-group-item">Bought Beer</li>
-<li class="list-group-item">Bought Beer</li>
-<li class="list-group-item">Bought Beer</li>
-<li class="list-group-item">Bought Beer</li>
-<li class="list-group-item">Bought Beer</li>
-<li class="list-group-item">Bought Beer</li>
+    <table class="table table-stripped table-hover">
+      <thead>
+        <tr>
+          <th>Amount (CURRENCY)</th>
+          <th>Category</th>
+          <th>Description</th>
+          <th>Date</th>
+        </tr>
+      </thead>
 
+      <tbody>
+        {% for expense in expenses%}
+        <tr>
+          <td>{{expense.amount}}</td>
+          <td>{{expense.category}}</td>
+          <td>{{expense.description}}</td>
+          <td>{{expense.date}}</td>
+        </tr>
 
-</ul>
+        {% endfor %}
+      </tbody>
+    </table>
 
+    {% endif %}
+  </div>
+</div>
 {% endblock content %}
