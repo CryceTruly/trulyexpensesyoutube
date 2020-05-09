@@ -7,6 +7,7 @@ from django.contrib.auth.models import User
 from django.core.paginator import Paginator
 import json
 from django.http import JsonResponse
+from userpreferences.models import UserPreference
 
 
 def search_expenses(request):
@@ -28,9 +29,11 @@ def index(request):
     paginator = Paginator(expenses, 5)
     page_number = request.GET.get('page')
     page_obj = Paginator.get_page(paginator, page_number)
+    currency = UserPreference.objects.get(user=request.user).currency
     context = {
         'expenses': expenses,
-        'page_obj': page_obj
+        'page_obj': page_obj,
+        'currency': currency
     }
     return render(request, 'expenses/index.html', context)
 

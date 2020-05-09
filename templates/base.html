@@ -17,14 +17,18 @@
   <body>
     <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
       <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">TrulyExpenses</a>
-      <input
-        class="form-control form-control-dark w-100"
-        type="text"
-        placeholder="Search"
-        aria-label="Search"
-      />
-      <ul class="navbar-nav px-3">
+
+      <ul
+        class="navbar-nav px-3"
+        style="display: flex; flex-direction: row; align-items: center;"
+      >
         <li class="nav-item text-nowrap">
+          <span class="nav-link" href="">
+            ({{request.user.username}})
+          </span>
+        </li>
+
+        <li class="nav-item text-nowrap mt-3 ml-2">
           <form action="{% url  'logout' %}" method="POST">
             {% csrf_token %}
             <input

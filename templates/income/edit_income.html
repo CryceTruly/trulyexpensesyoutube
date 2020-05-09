@@ -6,10 +6,10 @@
       <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
           <li class="breadcrumb-item">
-            <a href="{% url 'expenses'%}">Expenses</a>
+            <a href="{% url 'income'%}">Income</a>
           </li>
           <li class="breadcrumb-item active" aria-current="page">
-            Edit Expense
+            Edit Income
           </li>
         </ol>
       </nav>
@@ -17,7 +17,7 @@
 
     <div class="col-md-2">
       <a
-        href="{% url 'expense-delete' expense.id %}"
+        href="{% url 'income-delete' income.id %}"
         class="btn btn-danger btn-sm"
         >Delete</a
       >
@@ -26,7 +26,7 @@
 
   <div class="card">
     <div class="card-body">
-      <form action="{% url 'expense-edit' expense.id %}" method="post">
+      <form action="{% url 'income-edit' income.id %}" method="post">
         {% include 'partials/_messages.html'%} {% csrf_token %}
         <div class="form-group">
           <label for="">Amount</label>
@@ -47,26 +47,26 @@
           />
         </div>
         <div class="form-group">
-          <label for="">Category</label>
-          <select class="form-control" name="category">
-            <option selected name="category" value="{{values.category}}"
-              >{{values.category}}</option
+          <label for="">Source</label>
+          <select class="form-control" name="source">
+            <option selected name="source" value="{{values.source}}"
+              >{{values.source}}</option
             >
-            {% for category in categories%}
-            <option name="category" value="{{category.name}}"
-              >{{category.name}}</option
+            {% for source in sources%}
+            <option name="source" value="{{source.name}}"
+              >{{source.name}}</option
             >
 
             {% endfor %}
           </select>
         </div>
         <div class="form-group">
-          <label for="">Date of Expense</label>
+          <label for="">Date of Income</label>
           <input
             type="date"
-            value="{{values.date |date:'Y-m-d' }}"
+            value="{{values.date | date:'Y-m-d' }}"
             class="form-control form-control-sm"
-            name="expense_date"
+            name="income_date"
           />
         </div>
 
