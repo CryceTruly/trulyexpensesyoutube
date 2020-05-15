@@ -1,18 +1,32 @@
 {% extends 'base.html' %} {% block content %}
 
 <div class="container mt-4">
-  <nav aria-label="breadcrumb">
-    <ol class="breadcrumb">
-      <li class="breadcrumb-item">
-        <a href="{% url 'expenses'%}">Expenses</a>
-      </li>
-      <li class="breadcrumb-item active" aria-current="page">Add Expenses</li>
-    </ol>
-  </nav>
+  <div class="row">
+    <div class="col-md-10">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="{% url 'income'%}">Income</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">
+            Edit Income
+          </li>
+        </ol>
+      </nav>
+    </div>
+
+    <div class="col-md-2">
+      <a
+        href="{% url 'income-delete' income.id %}"
+        class="btn btn-danger btn-sm"
+        >Delete</a
+      >
+    </div>
+  </div>
 
   <div class="card">
     <div class="card-body">
-      <form action="{% url 'add-expenses' %}" method="post">
+      <form action="{% url 'income-edit' income.id %}" method="post">
         {% include 'partials/_messages.html'%} {% csrf_token %}
         <div class="form-group">
           <label for="">Amount</label>
@@ -33,28 +47,32 @@
           />
         </div>
         <div class="form-group">
-          <label for="">Category</label>
-          <select class="form-control" name="category">
-            {% for category in categories%}
-            <option name="category" value="{{category.name}}"
-              >{{category.name}}</option
+          <label for="">Source</label>
+          <select class="form-control" name="source">
+            <option selected name="source" value="{{values.source}}"
+              >{{values.source}}</option
+            >
+            {% for source in sources%}
+            <option name="source" value="{{source.name}}"
+              >{{source.name}}</option
             >
 
             {% endfor %}
           </select>
         </div>
         <div class="form-group">
-          <label for="">Date of Expense</label>
+          <label for="">Date of Income</label>
           <input
             type="date"
+            value="{{values.date | date:'Y-m-d' }}"
             class="form-control form-control-sm"
-            name="expense_date"
+            name="income_date"
           />
         </div>
 
         <input
           type="submit"
-          value="Submit"
+          value="Save"
           class="btn btn-primary btn-primary-sm"
         />
       </form>
