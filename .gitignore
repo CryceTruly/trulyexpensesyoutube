@@ -10,7 +10,7 @@ __pycache__/
 .env
 # C extensions
 *.so
-
+staticfiles/
 # Distribution / packaging
 .Python
 build/
